@@ -1,0 +1,14 @@
+BODY,80,,multiple
+L-Parotid,100,,multiple
+R-Parotid,110,,multiple
+R-ear,150,,multiple
+L-ear,160,,multiple
+R-eye,170,,multiple
+L-eye,180,,multiple
+L-lens,190,,multiple
+R-lens,200,,multiple
+L-Optic nerve,210,,multiple
+R-Optic nerve,220,,multiple
+Chiasma,230,,multiple
+Spinal cord,240,,multiple
+Brain stem,250,,multiple
