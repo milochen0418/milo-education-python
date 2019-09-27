@@ -10,9 +10,10 @@ def draw_plane_test():
 def clean_all_object():
     # Delect objects by type
     for o in bpy.context.scene.objects:
-        if o.type == 'MESH':
+        if o.type == 'MESH' or o.type == 'LAMP' or o.type=='FONT' or o.type=='EMPTY':
             o.select = True
         else:
+            print(o.type)
             o.select = False
     # Call the operator only once
     bpy.ops.object.delete()
@@ -32,5 +33,5 @@ def test_case_draw_point():
     
 clean_all_object()
 #draw_test()
-test_case_draw_point()
-draw_plane_test()
+#test_case_draw_point()
+#draw_plane_test()
