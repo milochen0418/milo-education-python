@@ -17,7 +17,14 @@ def clean_all_object():
     # Save and re-open the file to clean up the data blocks
     #bpy.ops.wm.save_as_mainfile(filepath=bpy.data.filepath)
     #bpy.ops.wm.open_mainfile(filepath=bpy.data.filepath)
-
-
+    
+def draw_point(pt):
+    (x,y,z) = tuple(pt)
+    bpy.ops.mesh.primitive_cube_add(radius=0.01, location=(0.1*x,0.1*y,0.1*z))    
+    
 clean_all_object()
-draw_test()
+#draw_test()
+for i in range(10):
+    pt = [i,i,i]
+    draw_point(pt)
+    
