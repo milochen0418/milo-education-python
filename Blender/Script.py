@@ -4,7 +4,9 @@ import bpy
 def draw_test():
     for i in range(10):
         bpy.ops.mesh.primitive_cube_add(radius=0.5, location=(i,i,i))
-
+def draw_plane_test():
+    bpy.ops.mesh.primitive_plane_add(radius=2, location=(0,0,0))
+    
 def clean_all_object():
     # Delect objects by type
     for o in bpy.context.scene.objects:
@@ -20,11 +22,15 @@ def clean_all_object():
     
 def draw_point(pt):
     (x,y,z) = tuple(pt)
-    bpy.ops.mesh.primitive_cube_add(radius=0.01, location=(0.1*x,0.1*y,0.1*z))    
+    bpy.ops.mesh.primitive_cube_add(radius=0.1, location=(1.0*x,1.0*y,1.0*z))
+
+def test_case_draw_point():    
+    for i in range(10):
+        pt = [i,i,i]
+        draw_point(pt)
+
     
 clean_all_object()
 #draw_test()
-for i in range(10):
-    pt = [i,i,i]
-    draw_point(pt)
-    
+test_case_draw_point()
+draw_plane_test()
