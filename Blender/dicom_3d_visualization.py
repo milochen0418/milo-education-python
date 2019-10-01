@@ -61,6 +61,9 @@ def add_image_plane(image_filepath, alpha=0.3, location=(0,0,0)):
     obj.show_wire = False
     #obj.active_material.transparency_method = 'MASK_Z' # MASK Z_TRANSPARENCY
     #obj.active_material.transparency_method = 'Z_TRANSPARENCY'
+    obj.dimensions = (5.12, 5.12, 0.0)
+    # Set dimensions for fit dicom image pixel_array ( 512x512 pixel)
+    
     return obj
 
 def add_text(radius = 0.3, location=(0,0,0), text='Hello', color=(2.0,0,0)):
@@ -104,20 +107,18 @@ def init_env():
     
     # remove all elements in scene but not Camera
     removeAllObjsWithoutCamera()
-    
     #return 
+    
     # set 3d cursors to zeros 
     setAll3DCursorsZeros()
     # set to material mdoe in view3d
     setMaterialModeInView3D()
     # Set user preference to support import images as plane 
     enableImportImageAsPlane()
-    
-    
 
     # Set test images
     image_filepath = '/Users/milochen/Desktop/CT.png'
-    for slice_idx in range(30):
+    for slice_idx in range(20):
         set3DCursorsXYZ(0.0, 0.0, 0.2 * slice_idx)
         obj = add_image_plane(image_filepath)
         pass
@@ -127,3 +128,5 @@ def init_env():
 
 
 init_env()
+
+
