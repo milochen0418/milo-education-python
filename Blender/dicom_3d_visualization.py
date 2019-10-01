@@ -20,6 +20,15 @@ def setMaterialModeInView3D():
 def enableImportImageAsPlane():
     # Set user preference to support import images as plane 
     bpy.ops.wm.addon_enable(module='io_import_images_as_planes')
+def add_image_plane(image_filepath, alpha=0.3, location=(0,0,0)):
+    bpy.ops.import_image.to_plane(location=(0,0,0), files=[{"name":image_filepath}])
+    obj = bpy.context.object # or bpy.data.objects['CT']
+    obj.active_material.emit = 1
+    obj.active_material.diffuse_intensity = 0 
+    obj.active_material.specular_intensity = 0
+    obj.active_material.use_transparency = True
+    obj.active_material.alpha = 0.3     
+    return obj
 
 def init_env():
     # remove all elements in scene
@@ -33,7 +42,7 @@ def init_env():
 
     # Set test image_filepath
     image_filepath = '/Users/milochen/Desktop/CT.png'
-    bpy.ops.import_image.to_plane(location=(0,0,0), files=[{"name":image_filepath}])
+    obj = add_image_plane(image_filepath)
 
 
 init_env()
