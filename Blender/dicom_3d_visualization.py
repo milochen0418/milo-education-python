@@ -10,6 +10,18 @@ def removeAllObjs():
         if not material.users:
             bpy.data.materials.remove(material)    
 
+def removeAllObjsWithoutCamera():
+    #types = ['MESH', 'CURVE', 'SURFACE', 'META', 'FONT', 'ARMATURE', 'LATTICE', 'EMPTY', 'CAMERA', 'LAMP', 'SPEAKER']
+    types = ['MESH', 'CURVE', 'SURFACE', 'META', 'FONT', 'ARMATURE', 'LATTICE', 'EMPTY', 'CAMERA', 'LAMP', 'SPEAKER']
+    # All types is refer to document of https://docs.blender.org/api/blender_python_api_current/bpy.ops.object.html
+    types.remove('CAMERA')
+    for item in types:
+        bpy.ops.object.select_all(action='DESELECT')
+        bpy.ops.object.select_by_type(type=item)
+        bpy.ops.object.delete()        
+        
+    
+
 def setAll3DCursorsZeros():
     # set 3d cursors to zeros 
     view3ds = [area.spaces[0] for area in bpy.context.screen.areas if (area.type=="VIEW_3D")]
@@ -28,6 +40,9 @@ def setMaterialModeInView3D():
     view3ds = [area.spaces[0] for area in bpy.context.screen.areas if (area.type=="VIEW_3D")]
     for view3d in view3ds:
         view3d.viewport_shade='MATERIAL'
+def setCamera(): 
+    
+    pass
 
 def enableImportImageAsPlane():
     # Set user preference to support import images as plane 
@@ -36,11 +51,16 @@ def add_image_plane(image_filepath, alpha=0.3, location=(0,0,0)):
     #bpy.ops.import_image.to_plane(location=(0,0,0), files=[{"name":image_filepath}])
     bpy.ops.import_image.to_plane(location=location, files=[{"name":image_filepath}])
     obj = bpy.context.object # or bpy.data.objects['CT']
-    obj.active_material.emit = 1
+    obj.active_material.emit = 2
     obj.active_material.diffuse_intensity = 0 
     obj.active_material.specular_intensity = 0
     obj.active_material.use_transparency = True
     obj.active_material.alpha = alpha
+    obj.show_transparent = True
+    #obj.show_wire = True
+    obj.show_wire = False
+    #obj.active_material.transparency_method = 'MASK_Z' # MASK Z_TRANSPARENCY
+    #obj.active_material.transparency_method = 'Z_TRANSPARENCY'
     return obj
 
 def add_text(radius = 0.3, location=(0,0,0), text='Hello', color=(2.0,0,0)):
@@ -80,17 +100,24 @@ def init_env():
     # init basic color material
     
     # remove all elements in scene
-    removeAllObjs()
+    # removeAllObjs()
+    
+    # remove all elements in scene but not Camera
+    removeAllObjsWithoutCamera()
+    
+    #return 
     # set 3d cursors to zeros 
     setAll3DCursorsZeros()
     # set to material mdoe in view3d
     setMaterialModeInView3D()
     # Set user preference to support import images as plane 
     enableImportImageAsPlane()
+    
+    
 
     # Set test images
     image_filepath = '/Users/milochen/Desktop/CT.png'
-    for slice_idx in range(10):
+    for slice_idx in range(30):
         set3DCursorsXYZ(0.0, 0.0, 0.2 * slice_idx)
         obj = add_image_plane(image_filepath)
         pass
