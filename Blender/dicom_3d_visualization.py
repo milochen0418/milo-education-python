@@ -1,9 +1,14 @@
 import bpy
 
+
 def removeAllObjs():
     # remove all elements in scene
     bpy.ops.object.select_by_layer()
     bpy.ops.object.delete(use_global=False)
+    # Clean all materials 
+    for material in bpy.data.materials:
+        if not material.users:
+            bpy.data.materials.remove(material)    
 
 def setAll3DCursorsZeros():
     # set 3d cursors to zeros 
@@ -38,7 +43,42 @@ def add_image_plane(image_filepath, alpha=0.3, location=(0,0,0)):
     obj.active_material.alpha = alpha
     return obj
 
+def add_text(radius = 0.3, location=(0,0,0), text='Hello', color=(2.0,0,0)):
+    bpy.ops.object.text_add(radius = radius, location = location)
+    obj = bpy.context.object
+    mesh = bpy.context.object.data
+    
+    obj.data.body = text
+        
+    mat_red = bpy.data.materials.new("Text")
+    #mat_red.diffuse_color = (2.0, 0.0, 0.0)
+    mat_red.diffuse_color = color
+    mat_red.emit = 2
+    
+    if len(mesh.materials) == 0:
+        mesh.materials.append(mat_red)
+    else:
+        mesh.materials[0] = mat_red    
+    return obj
+
+def init_color_material():
+    bpy.data.materials.new(name="Color_R")
+    mat = bpy.data.materials.get("Color_R")
+    mat.diffuse_color = (2,0,0)
+    mat.emit(2)
+    
+    bpy.data.materials.new(name="Color_G")
+    mat = bpy.data.materials.get("Color_G")
+    mat.diffuse_color = (0,1,0)
+    
+    bpy.data.materials.new(name="Color_B")
+    mat = bpy.data.materials.get("Color_B")
+    mat.diffuse_color = (0,0,1)
+    
+
 def init_env():
+    # init basic color material
+    
     # remove all elements in scene
     removeAllObjs()
     # set 3d cursors to zeros 
@@ -53,7 +93,10 @@ def init_env():
     for slice_idx in range(10):
         set3DCursorsXYZ(0.0, 0.0, 0.2 * slice_idx)
         obj = add_image_plane(image_filepath)
+        pass
 
+    text_obj = add_text(text='3D CT data show', radius=0.3 , location=(1,1,0),color=(2,0,0))
+    text_obj2 = add_text(text='3D3D', radius=0.3 , location=(1,1,0.5), color=(2,0,0))
 
 
 init_env()
