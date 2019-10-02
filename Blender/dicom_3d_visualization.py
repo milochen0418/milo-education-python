@@ -61,10 +61,14 @@ def add_image_plane(image_filepath, alpha=0.3, location=(0,0,0)):
     obj.show_wire = False
     #obj.active_material.transparency_method = 'MASK_Z' # MASK Z_TRANSPARENCY
     #obj.active_material.transparency_method = 'Z_TRANSPARENCY'
-    obj.dimensions = (5.12, 5.12, 0.0)
+    obj.dimensions = (2, 2, 0.0)
     # Set dimensions for fit dicom image pixel_array ( 512x512 pixel)
     
     return obj
+def draw_point(pt):
+    (x,y,z) = tuple(pt)
+    bpy.ops.mesh.primitive_cube_add(radius=0.02, location=(0.5*x,0.5*y,0.5*z))
+
 
 def add_text(radius = 0.3, location=(0,0,0), text='Hello', color=(2.0,0,0)):
     bpy.ops.object.text_add(radius = radius, location = location)
@@ -125,6 +129,10 @@ def init_env():
 
     text_obj = add_text(text='3D CT data show', radius=0.3 , location=(1,1,0),color=(2,0,0))
     text_obj2 = add_text(text='3D3D', radius=0.3 , location=(1,1,0.5), color=(2,0,0))
+
+    for i in range(10):
+        pt = [0,0,i]
+        draw_point(pt)
 
 
 init_env()
