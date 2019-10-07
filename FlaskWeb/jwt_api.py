@@ -31,5 +31,5 @@ def login():
     return make_response('Could not verify!', 401, {'WWW-Authenticate': 'Basic realm="Login Required"'})
 
 if __name__ == '__main__':
-
     app.run(host='0.0.0.0', debug=True)
+    print('open http://<HOST>/login and input correct password and username. then the page will return token')
