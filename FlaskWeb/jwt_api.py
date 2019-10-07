@@ -11,15 +11,24 @@ app.config['SECREC_KEY'] = 'thisisthesecretkey'
 def token_required(f):
     @wraps(f)
     def decorated(*args, **kwargs):
-        token = request.args.get('token') 
+        token = request.args.get('token')
+        if not token:
+            return jsonify({'message':'Token is missing' }), 403
+        try:
+            data = jwt.decode(token, app.config['SECREC_KEY'])
+        except:
+            return jsonify({'message': 'Token is invalid'}), 403
+        return f(*args, **kwargs)
+    return decorated
 
 @app.route('/unprotected')
 def unprotected():
-    return ''
+    return jsonify({'message': 'Anyone can view this'})
 
 @app.route('/protected')
+@token_required
 def protected():
-    return ''
+    return jsonify({'message': 'This is only avaliable for people with valid token'})
 
 
 @app.route('/login')
