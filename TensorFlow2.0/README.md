@@ -37,3 +37,8 @@ $ python
 2.0.0  
   
 When you see this information, it mean your tensorflow2.0 is ready in this conda environemnt 'tensorflow2.0'  
+
+
+# Test to execute hello world  
+$ python hello_minst_1.py  
+$ python hello_minst_2.py  
