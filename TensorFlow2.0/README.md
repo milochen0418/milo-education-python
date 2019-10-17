@@ -1,4 +1,4 @@
-# Install Anaconda3 in Ubuntu 8.04   
+# Install Anaconda3 in Ubuntu 18.04   
 ## Download Anaconda Bash Script
 $ cd /tmp  
 $ curl -O https://repo.anaconda.com/archive/Anaconda3-2019.03-Linux-x86_64.sh  
