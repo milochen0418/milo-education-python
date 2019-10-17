@@ -31,11 +31,12 @@ $ conda activate tensorflow2.0
 $ pip install tensorflow-gpu  
 
 ### Check it exists in environment 
-$ python   
+$ python  
+```   
 >>> import tensorflow  
 >>> tensorflow.__version__  
 2.0.0  
-  
+```  
 When you see this information, it mean your tensorflow2.0 is ready in this conda environemnt 'tensorflow2.0'  
 
 
