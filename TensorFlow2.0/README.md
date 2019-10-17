@@ -42,3 +42,5 @@ When you see this information, it mean your tensorflow2.0 is ready in this conda
 # Test to execute hello world  
 $ python hello_minst_1.py  
 $ python hello_minst_2.py  
+
+I assume you have GPU  
