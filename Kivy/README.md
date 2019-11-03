@@ -12,3 +12,5 @@ $ python 3DMonkey.py
 # Test Camera 
 $ python camera_demo.py  
 
+# Test Canvas
+$ python canvas_demo.py  
