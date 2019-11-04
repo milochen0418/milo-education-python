@@ -16,4 +16,9 @@ $ python camera_demo.py
 $ python canvas_demo.py  
 
 # Test use .kv file
-$ python use_kv_demo.py
+$ python use_kv_demo.py  
+
+# Test ListView demo by .kv file  
+$ python listview_demo.py  
+
+
