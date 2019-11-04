@@ -14,3 +14,6 @@ $ python camera_demo.py
 
 # Test Canvas
 $ python canvas_demo.py  
+
+# Test use .kv file
+$ python use_kv_demo.py
